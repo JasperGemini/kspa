@@ -1,0 +1,26 @@
+{
+  "name": "kspa-demo",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Márton Sági <hello@martonsagi.me>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "kendo-ui": "kendo-ui-core#^2016.2.523",
+    "requirejs": "^2.2.0",
+    "text": "requirejs-text#^2.0.15",
+    "requirejs-json": "^0.0.3"
+  }
+}

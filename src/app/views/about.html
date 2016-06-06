@@ -1,0 +1,21 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1 data-bind="text: data.heading"></h1>
+        <p data-bind="text: data.description"></p>
+        <p><a class="btn btn-primary btn-lg" role="button" data-bind="html: data.buttonText, visible: data.button, attr: { href: data.url }"></a></p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row" data-bind="source: data.sections" data-template="section-template">
+        <script id="section-template" type="text/x-kendo-template">
+            <div class="col-md-4">
+                <h2 data-bind="text: heading"></h2>
+                <p data-bind="text: content"></p>
+                <p><a class="btn btn-default" role="button" data-bind="html: buttonText, visible: button, attr: { href: url }"></a></p>
+            </div>
+        </script>
+    </div>
+</div>

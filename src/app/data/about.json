@@ -1,0 +1,30 @@
+{
+  "heading": "About Us",
+  "description": "This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.",
+  "button": true,
+  "url": "#",
+  "buttonText": "Learn more &raquo;",
+  "sections": [
+    {
+      "heading": "Heading 1",
+      "url": "#",
+      "button": true,
+      "buttonText": "View details &raquo;",
+      "content": "Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui."
+    },
+    {
+      "heading": "Heading 2",
+      "url": "#",
+      "button": false,
+      "buttonText": "View details &raquo;",
+      "content": "Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui."
+    },
+    {
+      "heading": "Heading 3",
+      "url": "#",
+      "button": true,
+      "buttonText": "View details &raquo;",
+      "content": "Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui."
+    }
+  ]
+}
