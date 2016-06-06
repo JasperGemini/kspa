@@ -28,6 +28,8 @@ define(['config', 'services/ui'], function (config, UiHelper) {
 
         route: null,
 
+        router: null,
+
         /**
          * Called by AppRouter.loadView when view is loading
          * @param {object} route current route parameters and info

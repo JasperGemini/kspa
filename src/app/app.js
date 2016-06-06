@@ -7,7 +7,7 @@
  * 
  * @module app
  * @requires services/router
- * @requires services/quirks
+ * @requires services/global
  * @requires config
  */
 define(['services/router', 'services/global', 'config'], function (Router, Global, config) {
@@ -36,16 +36,10 @@ define(['services/router', 'services/global', 'config'], function (Router, Globa
                 Global.onRouteChange(e);
             })
             .event("onRouteBack", function (e) {
-                console.log(e);
             })
             .event("onRouteMissing", function (e) {
                 console.log("Route is missing: " + e.url);
-
-                /**
-                 * using kendoRouter.navigate to get the 404 page would cause confusion in back-navigation,
-                 * our loadRoute() method comes handy in this case
-                 */
-                this.loadRoute(config.router.notFoundRoute);
+                this.handle404();
             })
             .event("navigateOnClick", function (e) {
                 Global.navigateOnClick(e);

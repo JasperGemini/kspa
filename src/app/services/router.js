@@ -104,7 +104,9 @@ define(['config'], function (config) {
             afterLoadView: function (route, view, viewModel) { }
         };
 
-        t.baseUrl = config.pushState == true ? config.baseUrl + '/' : '';
+        t.routes = [];
+
+        t.baseUrl = config.pushState === true ? config.baseUrl + '/' : '';
 
         // Save originally loaded HTML Title. This will be changed dynamically according to current route
         t.originalTitle = config.baseTitle || $('title').html();
@@ -150,7 +152,7 @@ define(['config'], function (config) {
     Router.prototype.event = function (name, eventHandler) {
         var t = this;
 
-        if (eventHandler === undefined || eventHandler === null) {
+        if (!eventHandler === undefined || eventHandler === null) {
             delete t.events[name];
         } else {
             t.events[name] = eventHandler;
@@ -178,6 +180,8 @@ define(['config'], function (config) {
         if ("beforeLoadRoutes" in t.events) {
             data = t.events.beforeLoadRoutes.call(t, data);
         }
+
+        Array.prototype.push.apply(t.routes, data);
 
         $.each(data, function (i, route) {
             // a route can have multiple names (aliases)
@@ -208,7 +212,7 @@ define(['config'], function (config) {
         var t = this;
 
         var routeName = name || route.name;
-        routeName = (config.pushState == true && config.baseUrl.length > 0 ? config.baseUrl.substring(1) : '')
+        routeName = (config.pushState === true && config.baseUrl.length > 0 ? config.baseUrl.substring(1) : '')
                     + routeName;
 
         t.kendoRouter.route(routeName, function () {
@@ -237,24 +241,64 @@ define(['config'], function (config) {
     };
 
     /**
+     * using kendoRouter.navigate to get the 404 page would cause confusion in back-navigation,
+     * our loadRoute() method comes in handy for that
+     */
+    Router.prototype.handle404 = function () {
+        var notFoundRoute = this.getRoute(config.router.notFoundRouteName);
+        if (notFoundRoute) {
+            this.loadRoute(notFoundRoute);
+        } else {
+            // fallback to default route
+            var defaultRoute = this.getRoute('/');
+            this.loadRoute(defaultRoute);
+            console.log("Route '" + config.router.notFoundRouteName + "' was not found in route definition.");
+        }
+    };
+
+    /**
+     * Gets a route object by name
+     * @param name
+     * @returns {*}
+     */
+    Router.prototype.getRoute = function (name) {
+        var route = this.routes.filter(function (item) {
+            if ($.isArray(item.name)) {
+                var subresult = item.name.filter(function (n) {
+                    return n === name;
+                });
+
+                return subresult.length > 0;
+            } else {
+                return item.name === name;
+            }
+        });
+
+        if (route.length > 0) {
+            return route[route.length-1];
+        }
+
+        return null;
+    };
+
+    /**
      * Helper for router navigation
      *
-     * @param {jQuery.event} e event object
      */
-    Router.prototype.initNavigate = function (e) {
+    Router.prototype.initNavigate = function () {
         var t = this;
 
         // these navigation links will be handled by kendo.Router
         $(document).ready(function () {
             $(document).on("click", config.router.routerHandledLinkClasses,
                 function (e) {
-                    if ($(this).attr('target') == '_self') {
+                    if ($(this).attr('target') === '_self') {
                         return true;
                     }
 
                     var canContinue = true,
                         url = $(this).attr('href'),
-                        baseUrl = (config.pushState == true ? config.baseUrl.substring(1) : '')
+                        baseUrl = (config.pushState === true ? config.baseUrl.substring(1) : '')
 
                     // override default behavior
                     if ("navigateOnClick" in t.events) {
@@ -262,8 +306,8 @@ define(['config'], function (config) {
                     }
 
                     // kendo.Router navigation continues
-                    if (canContinue == true) {
-                        if (url.length > 0 && url.substring(1, 1) != '#') {
+                    if (canContinue === true) {
+                        if (url.length > 0 && url.substring(1, 1) !== '#') {
                             t.kendoRouter.navigate(baseUrl + url);
 
                             return false;
@@ -288,12 +332,12 @@ define(['config'], function (config) {
         var t = this;
 
         viewModel.route = route;
-
+        viewModel.router = t;
         var promise = $.Deferred();
-        if ("load" in viewModel && viewModel.load != undefined) {
+        if ("load" in viewModel && viewModel.load) {
             var result = viewModel.load.call(viewModel, route);
 
-            if (result != undefined && result != null) {
+            if (result) {
                 result.done(function () {
                     promise.resolve();
                 });
@@ -335,8 +379,8 @@ define(['config'], function (config) {
         var t = this;
 
         // cleanup for previous viewmodel instance
-        if (t.currentViewModel != null) {
-            if (t.currentViewModel.unload != null) {
+        if (t.currentViewModel) {
+            if (t.currentViewModel.unload) {
                 t.currentViewModel.unload();
             }
 
@@ -359,7 +403,7 @@ define(['config'], function (config) {
             }
         };
 
-        if (viewModel != null) {
+        if (viewModel) {
             t.currentViewModel = viewModel;
             _viewModelHandler.call(t, viewModel, route)
                 .done(function () {
@@ -370,7 +414,7 @@ define(['config'], function (config) {
         }
 
         // set HTML Title
-        if (route != null) {
+        if (route) {
             $('title').html(route.title + t.originalTitle);
         }
     };
@@ -384,11 +428,12 @@ define(['config'], function (config) {
         // internal start function
         t._start = function () {
             // hide splash screen
-            if (config.splash == true) {
-                window.loading_screen.finish();
+            // @todo
+            if (config.splash === true) {
+                //TODO
             }
 
-            // fire up router
+            // router-handled links
             t.initNavigate();
 
             // load available routes from remote server or json file
@@ -408,16 +453,11 @@ define(['config'], function (config) {
             }
         };
 
-        // load default routes
-        t.addRoutes([
-            config.router.notFoundRoute
-        ]);
-
+        // load routes
         if ("localRoutes" in config.router && $.type(config.router.localRoutes) === 'string') {
             // loads available routes from json file
             require(['json!' + config.router.localRoutes], function (data) {
                 t.addRoutes(data);
-
                 t._start();
             });
         } else {

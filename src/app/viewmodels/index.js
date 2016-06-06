@@ -14,7 +14,23 @@ define(['services/viewmodel'], function (ViewModel) {
      * @type {kendo.observable}
      */
     var vm = ViewModel.extend({
+        conf: '',
+        routes: [],
         load: function (route) {
+            var t = this,
+                result = [];
+
+            $.each(this.router.routes, function (i, r) {
+                var route = JSON.parse(JSON.stringify(r));
+                if ($.isArray(route.name)) {
+                    route.name = route.name.join(', ');
+                }
+                route.viewModel = t.config.viewModel.basePath + route.viewModel + ".js";
+                result.push(route);
+            });
+
+            t.set("routes", result);
+            t.set("conf", JSON.stringify(t.config));
         },
         unload: function () {
         }

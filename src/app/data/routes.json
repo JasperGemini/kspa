@@ -1,20 +1,26 @@
 [
   {
-    "name": "/",
+    "name": ["", "/", "home"],
     "title": "Home",
     "templateUrl": "views/index.html",
     "viewModel": "index"
   },
   {
-    "name": "about",
+    "name": "404",
+    "title": "Not Found",
+    "templateUrl": "views/notfound.html",
+    "viewModel": "notfound"
+  },
+  {
+    "name": ["about", "about-us"],
+    "title": "About",
     "templateUrl": "views/about.html",
-    "viewModel": "about",
-    "title": "About"
+    "viewModel": "about"
   },
   {
     "name": "contact",
+    "title": "Contact",
     "templateUrl": "views/contact.html",
-    "viewModel": "contact",
-    "title": "Contact"
+    "viewModel": "contact"
   }
 ]

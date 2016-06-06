@@ -52,14 +52,9 @@ define([], function () {
         router: {
             /**
              * 404 route
-             * @type {object}
+             * @type {string}
              */
-            notFoundRoute: {
-                name: "404",
-                title: "Not Found",
-                templateUrl: "views/notfound.html",
-                viewModel: "notfound",
-            },
+            notFoundRouteName: "404",
 
             /**
              * URL of local (json) route definitions
@@ -79,7 +74,6 @@ define([], function () {
              */
             routerHandledLinkClasses: '#navbar a, a.spa'
         },
-        quirks: 'services/quirks',
 
         /**
          * kendo.Layout settings and view rendering parameters

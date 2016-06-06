@@ -1,11 +1,11 @@
-# Advanced Kendo Router (SPA) Example
-
+# Advanced Kendo Router SPA Example
+> Dynamic Routing
 
 ## Getting Started
 Hardcoded routing and view definitions in the app.js? There must be a better way. 
 Main purpose of this example is to show how dynamic route definitions can be handled with Kendo UI's Router module. 
-Well, it's almost dynamic. To properly handle missing routes, one initial route have been hardcoded: the 404 route.
-Eliminating that last tie is certainly possible, but this is something for the future.
+Well, it's almost dynamic. In order to properly handle missing routes, 404 route's name have to be hardcoded 
+into config.js. Eliminating that last tie is certainly possible, but this is something for the future.
 
 ### Backend-agnostic
 Routes can be placed into a json file, or requested from [your favorite] backend.
@@ -15,22 +15,28 @@ Same goes with view files, where view paths are part of the route definition.
 ```js
 [
   {
-    "name": "/",
-    "templateUrl": "views/index.html",
+    "name": ["", "/", "home"],
     "title": "Home",
+    "templateUrl": "views/index.html",
     "viewModel": "index"
   },
   {
-    "name": "about",
+    "name": "404",
+    "title": "Not Found",
+    "templateUrl": "views/notfound.html",
+    "viewModel": "notfound"
+  },
+  {
+    "name": ["about", "about-us"],
     "templateUrl": "views/about.html",
-    "title": "About"
     "viewModel": "about",
+    "title": "About"
   },
   {
     "name": "contact",
     "templateUrl": "views/contact.html",
-    "title": "Contact"
     "viewModel": "contact",
+    "title": "Contact"
   }
 ]
 ```
@@ -53,7 +59,53 @@ As minimalistic as it can be...
 
 ...and that's it!
 
-## Usage
+## Configurations
+
+### RequireJS configuration (main.js)
+
+```js
+require.config({
+    baseUrl: "./app",
+    paths: {},
+    shim: {},
+    // longer than default 7 seconds
+    waitSeconds: 30
+});
+```
+
+### App configuration (config.js)
+
+```js
+var config = {
+    baseUrl: '',
+    baseTitle: null,
+    culture: 'en',
+    pushState: false,
+    splash: false,
+    router: {
+        notFoundRouteName: "404",
+        localRoutes: "data/routes.json",
+        remoteRoutes: null,
+        routerHandledLinkClasses: '#navbar a, a.spa'
+    },
+    layout: {
+        template: 'views/layout.html',
+        templateViewModel: 'viewmodels/layout',
+        contentSelector: '#content',
+        containerSelector: '#main-container',
+        loaderSelector: '.router-loader',
+        defaultEngine: 'text'
+    },
+    viewModel: {
+        basePath: 'viewmodels/',
+        format: "text!",
+        destroyOnChange: false
+    }
+}
+```
+
+
+## Demo Usage
 Initialization
 ```shell
 npm install && bower install

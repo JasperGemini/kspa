@@ -4,11 +4,53 @@
     <div class="jumbotron">
         <h1>Advanced Kendo Router Example</h1>
         <p>
-            <a class="spa btn btn-lg btn-primary" href="missing-page" role="button">Go to Missing Page (404)</a>
+            <a class="spa btn btn-lg btn-primary" href="missing-page" role="button">Go to an invalid page (404)</a>
         </p>
         <p>
             <a class="spa btn btn-lg btn-primary" href="about" role="button">Go to About &raquo;</a>
         </p>
     </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h2>Loaded Routes</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Template URL</th>
+                            <th>ViewModel</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="source: routes" data-template="route-row">
+                        <script id="route-row" type="text/x-kendo-template">
+                            <tr>
+                                <td data-bind="text: name"></td>
+                                <td data-bind="text: title"></td>
+                                <td data-bind="text: templateUrl"></td>
+                                <td data-bind="text: viewModel"></td>
+                            </tr>
+                        </script>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h2>Loaded Configuration</h2>
+            </div>
+
+            <pre data-bind="text: conf"></pre>
+        </div>
+    </div>
+    <hr>
 
 </div> <!-- /container -->

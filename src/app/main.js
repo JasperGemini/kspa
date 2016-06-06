@@ -7,11 +7,10 @@
 // RequireJS configuration
 require.config({
     baseUrl: "./app",
-
     paths: {},
     shim: {},
     // longer than default 7 seconds
-    waitSeconds: 30
+    waitSeconds: 20
 });
 
 // initialize application
