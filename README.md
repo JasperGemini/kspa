@@ -1,15 +1,12 @@
 # Advanced Kendo Router SPA Example
-> Dynamic Routing
+> Routing
 
 ## Getting Started
 Hardcoded routing and view definitions in the app.js? There must be a better way. 
-Main purpose of this example is to show how dynamic route definitions can be handled with Kendo UI's Router module. 
-Well, it's almost dynamic. In order to properly handle missing routes, 404 route's name have to be hardcoded 
-into config.js. Eliminating that last tie is certainly possible, but this is something for the future.
+Main purpose of this example is to show how dynamically loaded route definitions can be handled with Kendo UI's Router module. Well, it's almost dynamic. In order to properly handle missing routes, 404 route's name have to be hardcoded into config.js. Eliminating that last tie is certainly possible, but this is something for the future.
 
 ### Backend-agnostic
-Routes can be placed into a json file, or requested from [your favorite] backend.
-Same goes with view files, where view paths are part of the route definition.
+Routes can be placed into a json file, or requested from [your favorite] backend. Same goes with view files, where view paths are part of the route definition.
 
 #### routes.json 
 ```js
@@ -28,18 +25,41 @@ Same goes with view files, where view paths are part of the route definition.
   },
   {
     "name": ["about", "about-us"],
+    "title": "About",
     "templateUrl": "views/about.html",
-    "viewModel": "about",
-    "title": "About"
+    "viewModel": "about"
   },
   {
     "name": "contact",
+    "title": "Contact",
     "templateUrl": "views/contact.html",
-    "viewModel": "contact",
-    "title": "Contact"
+    "viewModel": "contact"
   }
 ]
 ```
+
+
+### Demo Usage
+Initialization
+```shell
+npm install && bower install
+```
+
+Build with Grunt
+```shell
+grunt dist
+```
+
+Run the app with full source.. http://localhost:9001/
+```shell
+grunt serve-debug
+```
+
+..or run the optimized version: http://localhost:9000/
+```shell
+grunt serve-live
+```
+
 
 ## Dependencies
 As minimalistic as it can be...
@@ -68,8 +88,7 @@ require.config({
     baseUrl: "./app",
     paths: {},
     shim: {},
-    // longer than default 7 seconds
-    waitSeconds: 30
+    waitSeconds: 20
 });
 ```
 
@@ -102,28 +121,6 @@ var config = {
         destroyOnChange: false
     }
 }
-```
-
-
-## Demo Usage
-Initialization
-```shell
-npm install && bower install
-```
-
-Build with Grunt
-```shell
-grunt dist
-```
-
-Run the app with full source.. http://localhost:9001/
-```shell
-grunt serve-debug
-```
-
-..or run the optimized version: http://localhost:9000/
-```shell
-grunt serve-live
 ```
 
 ## Credits

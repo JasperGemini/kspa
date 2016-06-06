@@ -81,12 +81,14 @@ define([], function () {
          */
         layout: {
             /**
-             * HTML template of the content-wrapper
+             * HTML layout template
              * @type {string}
-             * @todo ability to use template selectors instead of hardcoded wrapper
              */
             template: 'views/layout.html',
 
+            /**
+             * Layout's viewmodel class
+             */
             templateViewModel: 'viewmodels/layout',
 
             /**

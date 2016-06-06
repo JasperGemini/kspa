@@ -15,6 +15,7 @@ define(['services/viewmodel'], function (ViewModel) {
      */
     var vm = ViewModel.extend({
         conf: '',
+        size: '',
         routes: [],
         load: function (route) {
             var t = this,
@@ -31,6 +32,11 @@ define(['services/viewmodel'], function (ViewModel) {
 
             t.set("routes", result);
             t.set("conf", JSON.stringify(t.config));
+            t.set("size", t.ui.getSizeClass());
+
+            $(window).on("resize", function () {
+                t.set("size", t.ui.getSizeClass());
+            });
         },
         unload: function () {
         }
