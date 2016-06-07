@@ -1,6 +1,6 @@
 {
-  "name": "kspa-demo",
-  "description": "",
+  "name": "kspa",
+  "description": "Advanced Kendo Router SPA Example",
   "main": "",
   "authors": [
     "Márton Sági <hello@martonsagi.me>"

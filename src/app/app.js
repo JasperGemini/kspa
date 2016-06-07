@@ -3,7 +3,7 @@
  * Contains basic init tasks, e.g.: router configuration, global event handlers, etc..
  * 
  * @author Márton Sági
- * @version 1.0
+ * @version 0.1
  * 
  * @module app
  * @requires services/router

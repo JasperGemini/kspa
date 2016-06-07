@@ -3,7 +3,7 @@
  * A fixed place for the inevitable custom quirks
  *
  * @author Márton Sági
- * @version 1.0
+ * @version 0.1
  *
  * @module services/global
  * @requires config

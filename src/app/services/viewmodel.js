@@ -7,7 +7,7 @@
  * @requires services/ui
  *
  * @author Márton Sági
- * @version 1.0
+ * @version 0.1
  */
 define(['config', 'services/ui'], function (config, UiHelper) {
     /**

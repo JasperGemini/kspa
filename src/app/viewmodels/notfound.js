@@ -2,7 +2,7 @@
  * Viewmodel of 404 page
  *
  * @author Márton Sági
- * @version 1.0
+ * @version 0.1
  *
  * @module viewmodels/404
  * @requires services/viewmodel

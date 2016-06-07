@@ -2,7 +2,7 @@
  * Viewmodel of Contact page
  *
  * @author Márton Sági
- * @version 1.0
+ * @version 0.1
  *
  * @module viewmodels/index
  * @requires services/ui

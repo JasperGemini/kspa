@@ -1,7 +1,7 @@
 ﻿/**
  * Application main entry point
  * @author Márton Sági
- * @version 1.0
+ * @version 0.1
  */
 
 // RequireJS configuration
