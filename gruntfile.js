@@ -176,7 +176,7 @@ module.exports = function (grunt) {
             'dir': appBuildPath,
             'mainConfigFile': assetPath + '/app/main.js',
             "optimizeAllPluginResources": true,
-            //'optimize': 'uglify2',
+            'optimize': 'uglify2',
             'normalizeDirDefines': 'all',
             'skipDirOptimize': true,
         },
