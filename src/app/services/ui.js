@@ -1,5 +1,18 @@
+/**
+ * UI helper functions
+ *
+ * @author Márton Sági
+ * @version 1.0
+ *
+ * @module viewmodels/index
+ * @requires services/config
+ */
 define(['config'], function (config) {
-    
+
+    /**
+     * @constructor
+     * @alias module:services/ui
+     */
     var UiHelper = function () {
         var t = this;
 
@@ -11,13 +24,22 @@ define(['config'], function (config) {
         ];
     };
 
-    UiHelper.prototype.loader = function (hide) {
-        var visible = hide || true,
-            loader = $(config.loaderSelector);
+    /**
+     * Handles loader animation/text while navigating between pages
+     * @param visible
+     */
+    UiHelper.prototype.loader = function (visible) {
+        var loader = $(config.layout.loaderSelector);
 
         loader.toggle(visible);
     };
 
+    /**
+     * Bootstrap-specific function
+     * Returns the actual screen-size in bootstrap definition
+     *
+     * @returns {string}
+     */
     UiHelper.prototype.getSizeClass = function () {
         var t = this;
 

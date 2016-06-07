@@ -10,10 +10,10 @@
  * @requires services/global
  * @requires config
  */
-define(['services/router', 'services/global', 'config'], function (Router, Global, config) {
+define(['services/router', 'services/global', 'services/ui', 'config'], function (Router, Global, ui, config) {
 
     /**
-     * Bootstrapper
+     * @constructor
      */
     var App = function () {
     };
@@ -47,6 +47,12 @@ define(['services/router', 'services/global', 'config'], function (Router, Globa
                 return true;
             })
             .event("beforeLoadView", function (route, view, viewModel) {
+                ui.loader(true);
+            })
+            .event("afterLoadView", function (route, view, viewModel) {
+                setTimeout(function () {
+                    ui.loader(false);
+                }, 750);
             });
 
         router.start();

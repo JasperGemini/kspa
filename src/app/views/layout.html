@@ -13,11 +13,14 @@
             <a class="navbar-brand" href="#" data-bind="text: name"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+
             <ul class="nav navbar-nav" data-bind="source: nav" data-template="menu">
                 <script id="menu" type="text/x-kendo-template">
                     <li><a href="#:url#">#: name #</a></li>
                 </script>
             </ul>
+            <ul class="nav navbar-nav navbar-right"><li><a class="router-loader">Loading...</a></li></ul>
+
         </div><!--/.nav-collapse -->
     </div>
 </nav>
